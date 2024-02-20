@@ -12,8 +12,8 @@ from PyQt5.QtWidgets import QFileDialog, QMessageBox
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
-        MainWindow.setWindowIcon(QIcon('lo.ico'))  # 设置界面图标
-        MainWindow.resize(888, 479)
+        MainWindow.setWindowIcon(QIcon('lo.ico'))
+        MainWindow.setFixedSize(888, 479)
         MainWindow.setStyleSheet("background-color: rgb(170, 170, 255);")
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
