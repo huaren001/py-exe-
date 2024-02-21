@@ -89,7 +89,6 @@ class Ui_MainWindow(object):
         self.pushButton.clicked.connect(self.open_filr)
         self.pushButton_3.clicked.connect(self.convert_to_exe)
         self.pushButton_2.clicked.connect(self.set_icon_path)
-        self.label.setText(f"温馨提示：\n耐心等待 预计大约1-2分钟即可食用🙃\n程序难免有点BUG，多多理解")
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "py一键转exe"))
