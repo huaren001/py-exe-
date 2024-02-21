@@ -7,8 +7,8 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QFileDialog, QMessageBox
 import PyInstaller.__main__
 
-class Ui_MainWindow(object):
-    def setupUi(self, MainWindow):
+class Ui_MainWindow(object):       # 定义一个名为Ui_MainWindow的类
+    def setupUi(self, MainWindow):       # 定义setupUi函数，用于设置UI界面
         MainWindow.setObjectName("MainWindow")
         MainWindow.setFixedSize(888, 479)
         MainWindow.setStyleSheet("background-color: rgb(170, 170, 255);")
@@ -87,6 +87,7 @@ class Ui_MainWindow(object):
     def convert_to_exe(self):       # 定义convert_to_exe的方法，用于将Python文件转换为exe文件
         file_path = self.lineEdit.text()
         icon_path = self.lineEdit_2.text()
+        #下述代码判断两个函数是否出现未填或空白，如果为空弹出警告窗口并返回
         if not file_path:
             QMessageBox.warning(None, "警告", "请设置要转换的文件！")
             return
@@ -95,15 +96,17 @@ class Ui_MainWindow(object):
             return
         try:
             PyInstaller.__main__.run([file_path, '--onefile', '--icon=' + icon_path, '--noconsole'])
+            #--onefile 表示将所有依赖项打包成一个单独的可执行文件    --icon 用于指定可执行文件的图标    --noconsole 表示在运行可执行文件时不显示控制台窗口   (注：可按照自己的需求改)
+            """下述代码中 如果打包成功，它会在textBrowser控件中显示一段话，并弹出一个窗口显示成功信息  如果发生异常，它会捕获异常并在弹出窗口中显示失败信息"""
             self.textBrowser.setText("文件已放.\dist目录下&#128579;")
             QMessageBox.information(None, "成功", "转换成功！")
         except Exception as e:
             QMessageBox.critical(None, "错误", f"转换失败：{e}")
 
-if __name__ == "__main__":
+if __name__ == "__main__":          # 如果当前脚本为主程序，则执行以下代码
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
-    ui.setupUi(MainWindow)
-    MainWindow.show()
-    sys.exit(app.exec_())
+    ui = Ui_MainWindow()        # 创建一个Ui_MainWindow对象
+    ui.setupUi(MainWindow)          # 调用setupUi方法设置UI界面
+    MainWindow.show()       # 显示主窗口
+    sys.exit(app.exec_())   # 进入事件循环，等待用户操作
