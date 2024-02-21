@@ -1,4 +1,7 @@
 # -*- coding: utf-8 -*-
+"""
+导入模块
+"""
 import sys
 from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QFileDialog, QMessageBox
@@ -50,18 +53,23 @@ class Ui_MainWindow(object):
 
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
+        """
+        将按钮的点击事件与下面另一个指定的函数连接起来
+        """
         self.pushButton.clicked.connect(self.open_filr)
         self.pushButton_3.clicked.connect(self.convert_to_exe)
         self.pushButton_2.clicked.connect(self.set_icon_path)
 
-    def retranslateUi(self, MainWindow):
+    def retranslateUi(self, MainWindow):        # 定义retranslateUi的方法，用于设置UI界面的文本内容
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow", "py一键转exe"))
         self.pushButton.setText(_translate("MainWindow", "打开文件"))
         self.pushButton_2.setText(_translate("MainWindow", "设置ICO图标"))
         self.pushButton_3.setText(_translate("MainWindow", "一键生成"))
-
-    def set_icon_path(self):
+    """
+    下面的函数与上面的按钮点击事件连接起来
+    """
+    def set_icon_path(self):                  # 定义set_icon_path的方法，将选择ICO图标文件并在lineEdit_2控件中显示对应的路径
         options = QFileDialog.Options()
         options |= QFileDialog.ReadOnly
         icon_path, _ = QFileDialog.getOpenFileName(None, "选择ICO图标文件", "", "Icon Files (*.ico);;All Files (*)",
@@ -70,13 +78,13 @@ class Ui_MainWindow(object):
             self.lineEdit_2.setText(icon_path)
 
     def open_filr(self):
-        options = QFileDialog.Options()
+        options = QFileDialog.Options()       # 与上面函数相同，定义open_filr方法，选择Python文件并在lineEdit控件中显示对应的路径
         options |= QFileDialog.ReadOnly
         file_name, _ = QFileDialog.getOpenFileName(None, "选择文件", "", "Python Files (*.py);;All Files (*)", options=options)
         if file_name:
             self.lineEdit.setText(file_name)
 
-    def convert_to_exe(self):
+    def convert_to_exe(self):       # 定义convert_to_exe的方法，用于将Python文件转换为exe文件
         file_path = self.lineEdit.text()
         icon_path = self.lineEdit_2.text()
         if not file_path:
